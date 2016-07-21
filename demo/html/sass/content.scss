@@ -1,0 +1,325 @@
+
+$titleBeforeColor:#ffaa00;
+$fontColor:#999;
+//mixin
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+//media
+$breakpoints: (
+  'sm': 'only screen and  (min-width: 480px)',
+  'md': 'only screen and ( min-width: 768px)',
+  'lg': 'only screen and ( min-width: 992px)'
+) !default;
+//long shadow
+@function makelongshadow($color) {
+  $val: 0px 0px $color;
+  @for $i from 1 through 200 {
+    $val: #{$val}, #{$i}px #{$i}px #{$color};
+  }
+  @return $val;
+}
+
+@mixin longshadow($color) {
+  text-shadow: makelongshadow($color);
+}
+
+@mixin respond-to($breakpoint) {
+  $query: map-get($breakpoints, $breakpoint);
+  
+  @if not $query {
+    @error 'No value found for `#{$breakpoint}`. Please make sure it is defined in `$breakpoints` map.';
+  }
+
+  @media #{if(type-of($query) == 'string', unquote($query), inspect($query))} {
+    @content;
+  }
+}
+//clear  fixed
+@mixin clearfix() {
+    &:before,
+    &:after {
+        content: "";
+        display: block;
+        clear:both;
+    }
+    &:after {
+        clear: both;
+    }
+}
+.page-container{
+	background:#f3f3f3;
+	position:relative;
+}
+.box{
+	background:#fefefe;
+}
+.section-title{
+	height:32px;
+	line-height:32px;
+	position:relative;
+	padding-left:18px;
+	&:after{
+		content:"";
+		height:20px;
+		width:5px;
+		position:absolute;
+		top:6px;
+		left:10px;
+		background:$titleBeforeColor;
+	}
+	h3{
+		font-size:16px;
+	}
+}
+.section-list-warrp{
+	position:relative;
+	#btn-to-left{
+		position:absolute;
+		right:0px;
+		top:40px;
+		width:16px;
+		height:28px;
+		z-index:1001;
+		background:url('../images/arrow_right.png') no-repeat;
+	}
+	.section-list{
+		position:absolute;
+		left:10px;
+		top:0;
+		height:90%;
+		overflow:hidden;
+		li{
+			float:left;
+			text-align:center;
+			width:20%;
+			margin:13px 1% 13px 1%;
+			overflow:hidden;
+			.teacher-name{
+				color:$fontColor;
+			}
+			img{
+				width:100%;
+				height:100%;
+				max-height:70px;
+				max-width:70px;
+			}
+		}
+	}
+	.auditorium-section-list{
+		width:100%;
+		margin:0 auto;
+		li{
+			width:44%;
+			overflow:hidden;
+			float:left;
+			padding:8px;
+			&:nth-of-type(2n){
+				border-left:1px solid #ccc;
+			}
+			&:nth-of-type(1){
+				border-bottom:1px solid #ccc;
+			}
+			&:nth-of-type(2){
+				border-bottom:1px solid #ccc;
+			}
+			a{
+				width:100%;
+				overflow:hidden;
+				position: relative;
+				img{
+					width:100%;
+				}
+				.list-title{
+					height:28px;
+					line-height:28px;
+					position:absolute;
+					bottom:2px;
+					left:0;
+					width:100%;
+					text-align:center;
+					color:#fff;
+					background:rgba(0,0,0,.4);
+				}
+			}
+			
+			.teacher-name{
+				padding:8px;
+				height:28px;
+				line-height:28px;
+				text-align:center;
+			}
+			
+		}
+	}
+	/*past class*/
+	.class-list{
+
+		.class-item{
+			height:78px;
+			padding-top:8px;
+			overflow:hidden;
+			position: relative;
+			border-bottom:1px solid #ccc;
+			.class-img{
+				width:80px;
+				height:60px;
+				overflow:hidden;
+				img{
+					width:100%;
+					height:100%;
+				}
+			}
+			.class-info{
+				position:absolute;
+				top:5px;
+				left:86px;
+				.class-info-title{
+					height:30px;
+					line-height:30px;
+					font-size:16px;
+					font-weight:500;
+					word-break:keep-all;           /* 不换行 */
+					white-space:nowrap;          /* 不换行 */
+					overflow:hidden;
+				}
+				.class-info-cont{
+					color:$fontColor;
+					font-size:12px;
+					height:24px;
+					line-height:24px;
+					word-break:keep-all;           /* 不换行 */
+					white-space:nowrap;          /* 不换行 */
+					overflow:hidden;
+					.list-teacher{
+						position: absolute;
+					    bottom: -24px;
+					    left: 40px;
+					    font-size:16px;
+					    color:$titleBeforeColor;
+					}
+				}
+			}
+		}
+	}
+	/*foot-bar*/
+	.foot-bar-list{
+		height:54px;
+		overflow:hidden;
+		.foot-bar-item{
+			float:left;
+			width:20%;
+			text-align:center;
+			position:relative;
+			i{
+				display:block;
+				width:42px;
+				height:36px;
+				position:absolute;
+				left:50%;
+				margin-left:-18px;
+				background-color:red;
+			}
+			.card{
+				background:url("../images/card.png") no-repeat;
+			}
+			.room{
+				background:url("../images/room.png") no-repeat;
+			}
+			.teacher{
+				background:url("../images/teacher.png") no-repeat;
+			}
+			.wangqi{
+				background:url("../images/wangqi.png") no-repeat;
+			}
+			.zhibo{
+				background:url("../images/zhibo.png") no-repeat;
+			}
+			.foot-txt{
+				display: block;
+			    width: 100%;
+			    height: 28px;
+			    text-align:center;
+				padding-top:40px;
+				color:$fontColor;
+			}
+		}
+	}
+
+
+}
+.famous-teacher,.auditorium,.past-class,.foot-bar{
+	@include clearfix();
+	clear:both;
+	padding:10px;
+}
+//add more
+.class-add-more{
+    height: 75px;
+    line-height: 75px;
+    text-align: center;
+    color: $fontColor;
+}
+.foot-bar{
+	position:fixed;
+	bottom:0;
+	left:0;
+	width:100%;
+}
+#pullDown, #pullUp {
+		background:transparent;
+		height:45px;
+		line-height:40px;
+		padding:0px 10px;
+		border-bottom:1px solid #ccc;
+		font-weight:bold;
+		font-size:14px;
+		color:#888;
+		margin-top: -15px;
+	}
+	#pullUp {
+		text-align:center;
+		height:65px;
+		padding:10px 10px 0px 0px;
+	}
+	#pullDown .pullDownIcon, #pullUp .pullUpIcon  {
+		display:inline-block;
+		width:40px; height:40px;
+		background:url(../images/pull-icon@2x.png) 0 0 no-repeat;
+		-webkit-background-size:40px 80px; background-size:40px 80px;
+		-webkit-transition-property:-webkit-transform;
+		-webkit-transition-duration:250ms;	
+	}
+	#pullDown .pullDownIcon {
+		-webkit-transform:rotate(0deg) translateZ(0);
+	}
+	#pullUp .pullUpIcon  {
+		-webkit-transform:rotate(-180deg) translateZ(0);
+	}
+	
+	#pullDown.flip .pullDownIcon {
+		-webkit-transform:rotate(-180deg) translateZ(0);
+	}
+	
+	#pullUp.flip .pullUpIcon {
+		-webkit-transform:rotate(0deg) translateZ(0);
+	}
+	
+	#pullDown.loading .pullDownIcon, #pullUp.loading .pullUpIcon {
+		background-position:0 100%;
+		-webkit-transform:rotate(0deg) translateZ(0);
+		-webkit-transition-duration:0ms;
+	
+		-webkit-animation-name:loading;
+		-webkit-animation-duration:2s;
+		-webkit-animation-iteration-count:infinite;
+		-webkit-animation-timing-function:linear;
+	}
+	
+	@-webkit-keyframes loading {
+		from { -webkit-transform:rotate(0deg) translateZ(0); }
+		to { -webkit-transform:rotate(360deg) translateZ(0); }
+	}
